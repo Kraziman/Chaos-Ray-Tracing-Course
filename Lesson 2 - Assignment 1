@@ -1,0 +1,98 @@
+#include<iostream>
+#include<fstream>
+#include<ctime>
+#include<cstdlib>
+
+using namespace std;
+
+int main() {
+	// Image dimensions
+	const int width = 960;
+	const int height = 540;
+	const int maxRGB = 255;
+
+	// Using it to make random colours
+	srand(time(0));
+
+	// Creating the image
+	ofstream image;
+	image.open("image.ppm");
+	if (image.is_open()) {
+		// Header info
+		image << "P3" << endl;
+		image << width << " " << height << endl;
+		image << maxRGB << endl;
+	}
+	// Colour code
+	for (int y = 0; y < height; y++) {
+		if (y < height / 4) {
+			for (int x = 0; x < width; x++) {
+				if (x < width/4) {
+					image << maxRGB << " " << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << endl;
+				}
+				else if (x < (width/4)*2) {
+					image << rand() % (maxRGB/2) << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
+				}
+				else if (x < (width/4)*3) {
+					image << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
+				}
+				else if (x < width) {
+					image << maxRGB << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
+				}
+			}
+		}
+		else if (y < (height / 4)*2) {
+			for (int x = 0; x < width; x++) {
+				if (x < width/4) {
+					image << maxRGB << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
+				}
+				else if (x < (width/4)*2) {
+					image << rand() % (maxRGB/2) << " " << maxRGB << " " << maxRGB << endl;
+				}
+				else if (x < (width/4)*3) {
+					image << maxRGB << " " << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << endl;
+				}
+				else if (x < width) {
+					image << rand() % (maxRGB/2) << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
+				}
+			}
+		}
+		else if (y < (height/4)*3) {
+			for (int x = 0; x < width; x++) {
+				if (x < width/4) {
+					image << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
+				}
+				else if (x < (width/4)*2) {
+					image << maxRGB << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
+				}
+				else if (x < (width/4)*3) {
+					image << maxRGB << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
+				}
+				else if (x < width) {
+					image << rand() % (maxRGB/2) << " " << maxRGB << " " << 250 << endl;
+				}
+			}
+
+		}
+		else if (y < height) {
+			for (int x = 0; x < width; x++) {
+				if (x < width/4) {
+					image << maxRGB << " " << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << endl;
+				}
+				else if (x < (width/4)*2) {
+					image << rand() % (maxRGB/2) << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
+				}
+				else if (x < (width/4)*3) {
+					image << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
+				}
+				else if (x < width) {
+					image << maxRGB << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
+				}
+			}
+		}
+	}
+
+	image.close();
+
+	return 0;
+}
