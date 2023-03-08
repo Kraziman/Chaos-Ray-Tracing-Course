@@ -5,12 +5,12 @@
 
 using namespace std;
 
-int main() {
-	// Image dimensions
-	const int width = 960;
-	const int height = 540;
-	const int maxRGB = 255;
+// Image dimensions
+const int width = 960;
+const int height = 540;
+const int maxRGB = 255;
 
+int main() {
 	// Using it to make random colours
 	srand(time(0));
 
