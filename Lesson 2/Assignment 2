@@ -1,0 +1,38 @@
+#include<iostream>
+#include<fstream>
+#include <cmath>
+
+using namespace std;
+
+const int width = 1920;
+const int height = 1080;
+const int maxRGB = 255;
+const int radius = 300;
+
+int main() {
+	// Creating the image
+	ofstream image;
+	image.open("circle.ppm");
+	if (image.is_open()) {
+		// Header info
+		image << "P3" << endl;
+		image << width << " " << height << endl;
+		image << maxRGB << endl;
+	}
+
+	// Colouring BS
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			if (pow(i - (height / 2), 2) + pow(j - (width / 2), 2) <= pow(radius, 2)) {
+				image << 255 << " " << 0 << " " << 0 << endl;
+			}
+			else {
+				image << 0 << " " << 0 << " " << 0 << endl;
+			}
+		}
+	}
+
+	image.close();
+
+	return 0;
+}
