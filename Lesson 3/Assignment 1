@@ -7,6 +7,7 @@ using namespace std;
 // Image settings
 const int width = 1920;
 const int height = 1080;
+static const int maxColorComponent = 255;
 
 int main()
 {
@@ -33,9 +34,9 @@ int main()
             rayDir[2] /= len;
 
             // Compute the color for this pixel based on the ray direction and write the RGB values directly to the output file
-            int r = fabs(rayDir[0] * 255);
-            int g = fabs(rayDir[1] * 255);
-            int b = fabs(rayDir[2] * 255);
+            int r = fabs(rayDir[0] * maxColorComponent);
+            int g = fabs(rayDir[1] * maxColorComponent);
+            int b = fabs(rayDir[2] * maxColorComponent);
             outFile << r << " " << g << " " << b << " ";
         }
         outFile << "\n";
