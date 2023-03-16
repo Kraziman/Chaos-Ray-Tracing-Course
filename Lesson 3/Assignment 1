@@ -1,0 +1,50 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+
+using namespace std;
+
+// Image settings
+const int width = 1920;
+const int height = 1080;
+
+int main()
+{
+    // Camera settings
+    float cameraPos[3] = { 0, 0, 0 };
+    float cameraDir[3] = { 0, 0, -1 };
+
+    // Image plane settings
+    float imagePlaneDist = 1.0f;
+    float aspectRatio = (float)width / (float)height;
+
+    // Loop over each pixel in the image plane and write the RGB values directly to the output file
+    ofstream outFile("output.ppm");
+    outFile << "P3\n" << width << " " << height << "\n255\n";
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            // Compute the ray direction for this pixel
+            float ndcX = ((float)x + 0.5f) / (float)width;
+            float ndcY = ((float)y + 0.5f) / (float)height;
+            float screenX = (2.0f * ndcX - 1.0f) * aspectRatio;
+            float screenY = 1.0f - 2.0f * ndcY;
+            float rayDir[3] = { screenX, screenY, -imagePlaneDist };
+            float len = sqrt(rayDir[0] * rayDir[0] + rayDir[1] * rayDir[1] + rayDir[2] * rayDir[2]);
+            rayDir[0] /= len;
+            rayDir[1] /= len;
+            rayDir[2] /= len;
+
+            // Compute the color for this pixel based on the ray direction and write the RGB values directly to the output file
+            int r = fabs(rayDir[0] * 255);
+            int g = fabs(rayDir[1] * 255);
+            int b = fabs(rayDir[2] * 255);
+            outFile << r << " " << g << " " << b << " ";
+        }
+        outFile << "\n";
+    }
+    outFile.close();
+
+    return 0;
+}
