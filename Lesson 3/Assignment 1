@@ -10,10 +10,6 @@ const int height = 1080;
 
 int main()
 {
-    // Camera settings
-    float cameraPos[3] = { 0, 0, 0 };
-    float cameraDir[3] = { 0, 0, -1 };
-
     // Image plane settings
     float imagePlaneDist = 1.0f;
     float aspectRatio = (float)width / (float)height;
