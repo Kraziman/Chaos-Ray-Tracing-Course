@@ -9,9 +9,12 @@ using namespace std;
 const int width = 960;
 const int height = 540;
 const int maxRGB = 255;
+const int rectanglesCount = 5;
+const int rectangleWidth = width / rectanglesCount;
+const int rectangleHeight = height / rectanglesCount;
 
 int main() {
-	// Using it to make random colours
+	// Seed the random number generator with the current time
 	srand(time(0));
 
 	// Creating the image
@@ -23,76 +26,42 @@ int main() {
 		image << width << " " << height << endl;
 		image << maxRGB << endl;
 	}
-	// Colour code
-	for (int y = 0; y < height; y++) {
-		if (y < height / 4) {
-			for (int x = 0; x < width; x++) {
-				if (x < width/4) {
-					image << maxRGB << " " << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << endl;
+	// TODO Add Comments *Lazyyy*
+	int colourCounter = 0;
+	for (int heightCounter = 0; heightCounter < rectanglesCount; heightCounter++) {
+		for (int y = 0; y < rectangleHeight; y++) {
+			for (int widthCounter = 0; widthCounter < rectanglesCount; widthCounter++) {
+				for (int x = 0; x < rectangleWidth; x++) {
+					switch (colourCounter % 6) {
+					case 0:
+						image << maxRGB << " " << rand() % (maxRGB / 2) << " " << rand() % (maxRGB / 2) << endl;
+						break;
+					case 1:
+						image << rand() % (maxRGB / 2) << " " << maxRGB << " " << rand() % (maxRGB / 2) << endl;
+						break;
+					case 2:
+						image << rand() % (maxRGB / 2) << " " << rand() % (maxRGB / 2) << " " << maxRGB << endl;
+						break;
+					case 3:
+						image << maxRGB << " " << maxRGB << " " << rand() % (maxRGB / 2) << endl;
+						break;
+					case 4:
+						image << rand() % (maxRGB / 2) << " " << maxRGB << " " << maxRGB << endl;
+						break;
+					case 5:
+						image << maxRGB << " " << rand() % (maxRGB / 2) << " " << maxRGB << endl;
+						break;
+					default:
+						break;
+					}
 				}
-				else if (x < (width/4)*2) {
-					image << rand() % (maxRGB/2) << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
-				}
-				else if (x < (width/4)*3) {
-					image << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
-				}
-				else if (x < width) {
-					image << maxRGB << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
-				}
+				colourCounter++;
 			}
+			colourCounter -= rectanglesCount;
 		}
-		else if (y < (height / 4)*2) {
-			for (int x = 0; x < width; x++) {
-				if (x < width/4) {
-					image << maxRGB << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
-				}
-				else if (x < (width/4)*2) {
-					image << rand() % (maxRGB/2) << " " << maxRGB << " " << maxRGB << endl;
-				}
-				else if (x < (width/4)*3) {
-					image << maxRGB << " " << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << endl;
-				}
-				else if (x < width) {
-					image << rand() % (maxRGB/2) << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
-				}
-			}
-		}
-		else if (y < (height/4)*3) {
-			for (int x = 0; x < width; x++) {
-				if (x < width/4) {
-					image << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
-				}
-				else if (x < (width/4)*2) {
-					image << maxRGB << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
-				}
-				else if (x < (width/4)*3) {
-					image << maxRGB << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
-				}
-				else if (x < width) {
-					image << rand() % (maxRGB/2) << " " << maxRGB << " " << 250 << endl;
-				}
-			}
-
-		}
-		else if (y < height) {
-			for (int x = 0; x < width; x++) {
-				if (x < width/4) {
-					image << maxRGB << " " << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << endl;
-				}
-				else if (x < (width/4)*2) {
-					image << rand() % (maxRGB/2) << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
-				}
-				else if (x < (width/4)*3) {
-					image << rand() % (maxRGB/2) << " " << rand() % (maxRGB/2) << " " << maxRGB << endl;
-				}
-				else if (x < width) {
-					image << maxRGB << " " << maxRGB << " " << rand() % (maxRGB/2) << endl;
-				}
-			}
-		}
+		colourCounter += rectanglesCount;
 	}
 
 	image.close();
-
 	return 0;
 }
